@@ -83,11 +83,11 @@ umu-run ./Game.exe
 </section>]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Linux에서 RPG Maker MV로 제작된 게임 실행하기]]></title>
+        <title type="html"><![CDATA[How to run RPG Maker MV games on Linux]]></title>
         <id>how_to_run_rpg_maker_mv_on_linux</id>
         <link href="https://blog-en.litehell.info/post/how_to_run_rpg_maker_mv_on_linux"/>
         <updated>2025-10-19T16:52:05.437Z</updated>
-        <summary type="html"><![CDATA[wine으로 실행이 잘 안 될 때]]></summary>
+        <summary type="html"><![CDATA[when it does not work well with wine]]></summary>
         <content type="html"><![CDATA[<h1>Introduction</h1>
 <p>I tried to run games, developed with RPG Maker MV, but it stucks at loading.</p>
 <h1>Solution</h1>
