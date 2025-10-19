@@ -14,4 +14,72 @@
     <subtitle>LiteHell's personal blog with articles related to my life, software engineers, and computers</subtitle>
     <logo>https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1</logo>
     <rights>All rights reserved 2020 ~ 2025 © Yeonjin Shin</rights>
+    <entry>
+        <title type="html"><![CDATA[How to run non-Steam Windows game on Linux with WiVRn]]></title>
+        <id>wivrn_for_non_steam_windows_games</id>
+        <link href="https://blog-en.litehell.info/post/wivrn_for_non_steam_windows_games"/>
+        <updated>2025-10-19T16:10:12.951Z</updated>
+        <summary type="html"><![CDATA[Troubleshooting with umu-launcher]]></summary>
+        <content type="html"><![CDATA[<h1>Introduction</h1>
+<p>I use Linux for laptop. I installed <a href="https://github.com/WiVRn/WiVRn">WiVRn</a> and <a href="https://gitlab.com/znixian/OpenOVR/">OpenComposite</a><sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref aria-describedby="footnote-label">1</a></sup> for VR gaming on Linux, as recommended by <a href="https://social.silicon.moe/@perillamint">perillamint</a>.</p>
+<p>It works well for Linux native VR programs (e.g. <a href="https://gitlab.freedesktop.org/monado/demos/xrgears">xrgears</a>) and Steam games.</p>
+<p>However, it had a problem that non-Steam Windows games don't work.</p>
+<h2>First try</h2>
+<p>Steam games works well for VR. Steam uses Proton. Then, Why don't I use Proton for non-Steam games?</p>
+<h3>umu-launcher</h3>
+<p>Therefore, I tried <a href="https://github.com/Open-Wine-Components/umu-launcher">umu-launcher</a>, a program to run <a href="https://github.com/ValveSoftware/Proton">Proton</a> for games not in Steam. (Actually, It uses <a href="https://github.com/GloriousEggroll/proton-ge-custom">Proton GE</a>, not Proton by Valve. But, it doesn't matter in this post.)</p>
+<p>Proton includes OpenXR/VR support. So I expected it will work well if I set environment variables following <a href="https://github.com/WiVRn/WiVRn/blob/master/docs/steamvr.md">SteamVR documentation of WinVR</a>. But it didn't work.</p>
+<pre><code class="language-env">PRESSURE_VESSEL_FILESYSTEMS_RW=/run/user/1000/wivrn/comp_ipc
+XR_RUNTIME_JSON=/run/host/usr/share/openxr/1/openxr_wivrn.json
+</code></pre>
+<p>Why?</p>
+<h4>Reason</h4>
+<p>After some googling, I found that <a href="https://github.com/ValveSoftware/Proton/issues/8256">It needs Steam to be launched to use OpenVR/XR on Proton</a>, and <a href="https://github.com/GloriousEggroll/proton-ge-custom/issues/214#issuecomment-3230936706">umu launcher doesn't launch Steam by default</a>.</p>
+<p>How can I resolve it with minimum efforts?</p>
+<h2>Solution: Then run Steam :D</h2>
+<p>Simple. Just run Steam.</p>
+<p>Firstly, Let's check where the Proton is. Check debug log by running this command (Type <code>/tmp/2q3ef32t</code> part randomly. It doesn't matter)</p>
+<pre><code class="language-bash">UMU_LOG=debug umu-run /tmp/2q3ef32t
+</code></pre>
+<p>Then, you can see the location of <code>proton</code> from the console log. (e.g. <code>/home/foo/.local/share/Steam/compatibilitytools.d/UMU-Proton-9.0-4e/proton</code>) The below is example part of console log.</p>
+<pre><code>[umu.umu_run:887] DEBUG: (PosixPath('/home/foo/.local/share/umu/steamrt3/umu'), '--verb', 'waitforexitandrun', '--', PosixPath('/home/foo/.local/share/umu/steamrt3/umu-shim'), PosixPath('/home/foo/.local/share/Steam/compatibilitytools.d/UMU-Proton-9.0-4e/proton'), 'waitforexitandrun', './asdf')
+</code></pre>
+<p>Find this code from the <code>proton</code> file with editor</p>
+<pre><code class="language-python">        <span class="pl-c"># CoD: Black Ops 3 workaround</span>
+        <span class="pl-k">if</span> os.environ.get(<span class="pl-s"><span class="pl-pds">"</span>SteamGameId<span class="pl-pds">"</span></span>, <span class="pl-c1">0</span>) <span class="pl-k">in</span> [
+                    <span class="pl-s"><span class="pl-pds">"</span>311210<span class="pl-pds">"</span></span>,   <span class="pl-c"># CoD: Black Ops 3</span>
+                    <span class="pl-s"><span class="pl-pds">"</span>1549250<span class="pl-pds">"</span></span>,  <span class="pl-c"># Undecember</span>
+                ]:
+            argv <span class="pl-k">=</span> [g_proton.wine_bin, <span class="pl-s"><span class="pl-pds">"</span>c:<span class="pl-cce">\\</span>Program Files (x86)<span class="pl-cce">\\</span>Steam<span class="pl-cce">\\</span>steam.exe<span class="pl-pds">"</span></span>]
+</code></pre>
+<p>Replace above code to below.</p>
+<pre><code class="language-python">        <span class="pl-k">if</span> os.environ.get(<span class="pl-s"><span class="pl-pds">"</span>UMU_RUN_STEAM<span class="pl-pds">"</span></span>, <span class="pl-c1">0</span>) <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>:
+            argv <span class="pl-k">=</span> [g_proton.wine64_bin, <span class="pl-s"><span class="pl-pds">"</span>c:<span class="pl-cce">\\</span>windows<span class="pl-cce">\\</span>system32<span class="pl-cce">\\</span>steam.exe<span class="pl-pds">"</span></span>]
+        <span class="pl-c"># CoD: Black Ops 3 workaround</span>
+        <span class="pl-k">elif</span> os.environ.get(<span class="pl-s"><span class="pl-pds">"</span>SteamGameId<span class="pl-pds">"</span></span>, <span class="pl-c1">0</span>) <span class="pl-k">in</span> [
+                    <span class="pl-s"><span class="pl-pds">"</span>311210<span class="pl-pds">"</span></span>,   <span class="pl-c"># CoD: Black Ops 3</span>
+                    <span class="pl-s"><span class="pl-pds">"</span>1549250<span class="pl-pds">"</span></span>,  <span class="pl-c"># Undecember</span>
+                ]:
+            argv <span class="pl-k">=</span> [g_proton.wine_bin, <span class="pl-s"><span class="pl-pds">"</span>c:<span class="pl-cce">\\</span>Program Files (x86)<span class="pl-cce">\\</span>Steam<span class="pl-cce">\\</span>steam.exe<span class="pl-pds">"</span></span>]
+</code></pre>
+<p>Finally, Run game <code>UMU_RUN_STEAM</code> environment variable and WiVRn-related environment variables. Check this script for details.</p>
+<pre><code class="language-bash"><span class="pl-c">#!/bin/sh</span>
+<span class="pl-k">export</span> UMU_RUN_STEAM=1 
+<span class="pl-k">export</span> PRESSURE_VESSEL_FILESYSTEMS_RW=/run/user/1000/wivrn/comp_ipc
+<span class="pl-k">export</span> XR_RUNTIME_JSON=/run/host/usr/share/openxr/1/openxr_wivrn.json
+<span class="pl-k">export</span> PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
+umu-run ./Game.exe
+</code></pre>
+<p>Then It works.</p>
+<h1>Final words</h1>
+<p>It's not fundamental solution but simple solution. I wish it could help...</p>
+<hr>
+<section data-footnotes class="footnotes"><h1 class="sr-only" id="footnote-label">Footnotes</h1>
+<ol>
+<li id="user-content-fn-1">
+<p>The program that makes games using <a href="https://github.com/ValveSoftware/openvr">OpenVR</a> be able to run with <a href="https://www.khronos.org/openxr/">OpenXR</a> API. <a href="#user-content-fnref-1" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>]]></content>
+    </entry>
 </feed>
