@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://blog-en.litehell.info</id>
+    <title>LiteHell's blog</title>
+    <updated>2025-10-19T09:20:54.590Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>Yeonjin Shin</name>
+        <email>litehell@litehell.info</email>
+        <uri>https://litehell.info</uri>
+    </author>
+    <link rel="alternate" href="https://blog-en.litehell.info"/>
+    <link rel="self" href="https://blog-en.litehell.info/feed/atom"/>
+    <subtitle>LiteHell's personal blog with articles related to my life, software engineers, and computers</subtitle>
+    <logo>https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1</logo>
+    <rights>All rights reserved 2020 ~ 2025 © Yeonjin Shin</rights>
+</feed>

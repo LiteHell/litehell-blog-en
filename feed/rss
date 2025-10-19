@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>LiteHell's blog</title>
+        <link>https://blog-en.litehell.info</link>
+        <description>LiteHell's personal blog with articles related to my life, software engineers, and computers</description>
+        <lastBuildDate>Sun, 19 Oct 2025 09:20:54 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <image>
+            <title>LiteHell's blog</title>
+            <url>https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1</url>
+            <link>https://blog-en.litehell.info</link>
+        </image>
+        <copyright>All rights reserved 2020 ~ 2025 © Yeonjin Shin</copyright>
+    </channel>
+</rss>

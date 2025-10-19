@@ -1,0 +1,13 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "LiteHell's blog",
+    "home_page_url": "https://blog-en.litehell.info",
+    "feed_url": "https://blog-en.litehell.info/feed/json",
+    "description": "LiteHell's personal blog with articles related to my life, software engineers, and computers",
+    "icon": "https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1",
+    "author": {
+        "name": "Yeonjin Shin",
+        "url": "https://litehell.info"
+    },
+    "items": []
+}
