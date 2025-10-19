@@ -83,5 +83,25 @@ umu-run ./Game.exe
 </section>]]></content:encoded>
             <enclosure url="https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1" length="0" type="image//avatar/837266b567b50fd59e72428220bf69b1"/>
         </item>
+        <item>
+            <title><![CDATA[Linux에서 RPG Maker MV로 제작된 게임 실행하기]]></title>
+            <link>https://blog-en.litehell.info/post/how_to_run_rpg_maker_mv_on_linux</link>
+            <guid>how_to_run_rpg_maker_mv_on_linux</guid>
+            <pubDate>Sun, 19 Oct 2025 16:52:05 GMT</pubDate>
+            <description><![CDATA[wine으로 실행이 잘 안 될 때]]></description>
+            <content:encoded><![CDATA[<h1>Itntroduction</h1>
+<p>I tried to run games, developed with RPG Maker MV, but it stucks at loading.</p>
+<h1>Solution</h1>
+<p>I thought installing Windows on VM, but I found <code>nwjs.dll</code> file. The structure of <code>package.json</code> in the <code>www</code> directory of the game is also similar with the one of nwjs applications.</p>
+<p>What if I just use nwjs binary for Linux? I tried it, and it actually worked.</p>
+<ol>
+<li>Download Linux binaries from <a href="https://nwjs.io/">nwjs homepage</a> (No need to use SDK versions)</li>
+<li>Find a directory having <code>package.json</code> (Usually <code>www</code> directory)</li>
+<li>Run the nwjs binary, downloading in the Step 1, with the directory found in the Step 2 as parameter. (e.g. <code>~/nwjs-binary/nwjs ~/game/www</code>)</li>
+<li>If it didn't work, the <code>package.json</code> file might have empty <code>name</code>. Update the <code>name</code> property of <code>package.json</code> file to arbitary random value.</li>
+</ol>
+<p>If you follow this guide, it should work. It might not work for some games, but... it works for me.</p>]]></content:encoded>
+            <enclosure url="https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1" length="0" type="image//avatar/837266b567b50fd59e72428220bf69b1"/>
+        </item>
     </channel>
 </rss>
