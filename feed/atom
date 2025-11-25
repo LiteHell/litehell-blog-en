@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog-en.litehell.info</id>
     <title>LiteHell's blog</title>
-    <updated>2025-10-19T09:20:54.590Z</updated>
+    <updated>2025-11-25T13:11:43.828Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Yeonjin Shin</name>
@@ -14,6 +14,30 @@
     <subtitle>LiteHell's personal blog with articles related to my life, software engineers, and computers</subtitle>
     <logo>https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1</logo>
     <rights>All rights reserved 2020 ~ 2025 © Yeonjin Shin</rights>
+    <entry>
+        <title type="html"><![CDATA[How to fix libGL (MESA-LOADER) error on 64-bit Fedora]]></title>
+        <id>how_to_fix_libgl_error_on_64bit_fedora</id>
+        <link href="https://blog-en.litehell.info/post/how_to_fix_libgl_error_on_64bit_fedora"/>
+        <updated>2025-11-25T13:11:43.828Z</updated>
+        <summary type="html"><![CDATA[Error due to missing 32bit library]]></summary>
+        <content type="html"><![CDATA[<h1>Problem</h1>
+<p>You may encounter this error when you try to run Windows game with umu-launcher or wine, on 64bit Fedora.</p>
+<pre><code>libGL error: MESA-LOADER: failed to open iris: /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri/iris_dri.so: wrong ELF class: ELFCLASS64 (search paths /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri)
+libGL error: failed to load driver: iris
+libGL error: MESA-LOADER: failed to open swrast: /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri/swrast_dri.so: wrong ELF class: ELFCLASS64 (search paths /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri)
+libGL error: failed to load driver: swrast
+X Error of failed request:  GLXBadContext
+  Major opcode of failed request:  150 (GLX)
+  Minor opcode of failed request:  6 (X_GLXIsDirect)
+  Serial number of failed request:  537
+  Current serial number in output stream:  536
+
+</code></pre>
+<h1>Solution</h1>
+<p>Solution is very simple. Just install 32bit library.</p>
+<pre><code class="language-bash">sudo dnf install mesa-libGL.i686
+</code></pre>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[How to run non-Steam Windows game on Linux with WiVRn]]></title>
         <id>wivrn_for_non_steam_windows_games</id>

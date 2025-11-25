@@ -4,7 +4,7 @@
         <title>LiteHell's blog</title>
         <link>https://blog-en.litehell.info</link>
         <description>LiteHell's personal blog with articles related to my life, software engineers, and computers</description>
-        <lastBuildDate>Sun, 19 Oct 2025 09:20:54 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 25 Nov 2025 13:11:43 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -14,6 +14,31 @@
             <link>https://blog-en.litehell.info</link>
         </image>
         <copyright>All rights reserved 2020 ~ 2025 © Yeonjin Shin</copyright>
+        <item>
+            <title><![CDATA[How to fix libGL (MESA-LOADER) error on 64-bit Fedora]]></title>
+            <link>https://blog-en.litehell.info/post/how_to_fix_libgl_error_on_64bit_fedora</link>
+            <guid>how_to_fix_libgl_error_on_64bit_fedora</guid>
+            <pubDate>Tue, 25 Nov 2025 13:11:43 GMT</pubDate>
+            <description><![CDATA[Error due to missing 32bit library]]></description>
+            <content:encoded><![CDATA[<h1>Problem</h1>
+<p>You may encounter this error when you try to run Windows game with umu-launcher or wine, on 64bit Fedora.</p>
+<pre><code>libGL error: MESA-LOADER: failed to open iris: /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri/iris_dri.so: wrong ELF class: ELFCLASS64 (search paths /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri)
+libGL error: failed to load driver: iris
+libGL error: MESA-LOADER: failed to open swrast: /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri/swrast_dri.so: wrong ELF class: ELFCLASS64 (search paths /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri)
+libGL error: failed to load driver: swrast
+X Error of failed request:  GLXBadContext
+  Major opcode of failed request:  150 (GLX)
+  Minor opcode of failed request:  6 (X_GLXIsDirect)
+  Serial number of failed request:  537
+  Current serial number in output stream:  536
+
+</code></pre>
+<h1>Solution</h1>
+<p>Solution is very simple. Just install 32bit library.</p>
+<pre><code class="language-bash">sudo dnf install mesa-libGL.i686
+</code></pre>]]></content:encoded>
+            <enclosure url="https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1" length="0" type="image//avatar/837266b567b50fd59e72428220bf69b1"/>
+        </item>
         <item>
             <title><![CDATA[How to run non-Steam Windows game on Linux with WiVRn]]></title>
             <link>https://blog-en.litehell.info/post/wivrn_for_non_steam_windows_games</link>
