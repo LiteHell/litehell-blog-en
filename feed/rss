@@ -4,7 +4,7 @@
         <title>LiteHell's blog</title>
         <link>https://blog-en.litehell.info</link>
         <description>LiteHell's personal blog with articles related to my life, software engineers, and computers</description>
-        <lastBuildDate>Tue, 25 Nov 2025 13:11:43 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 29 Jun 2026 14:12:12 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -14,6 +14,24 @@
             <link>https://blog-en.litehell.info</link>
         </image>
         <copyright>All rights reserved 2020 ~ 2025 © Yeonjin Shin</copyright>
+        <item>
+            <title><![CDATA[How to reload tor relay config]]></title>
+            <link>https://blog-en.litehell.info/post/how_to_reload_tor_config</link>
+            <guid>how_to_reload_tor_config</guid>
+            <pubDate>Mon, 29 Jun 2026 14:12:12 GMT</pubDate>
+            <description><![CDATA[Reloading without restarting]]></description>
+            <content:encoded><![CDATA[<p>To reload relay config, restarting tor works very well.</p>
+<p>But sometimes, Tor flags disappear while restarting if unlucky.</p>
+<p>To avoid that, you can reload tor config without restarting, by sending SIGHUP signal to tor process.</p>
+<pre><code class="language-bash"><span class="pl-c"># way to use pkill</span>
+pkill --signal 1 tor
+<span class="pl-c"># way to use kill</span>
+<span class="pl-c1">kill</span> -1 (tor pid)
+</code></pre>
+<p><code>1</code> in command means SIGHUP signal.</p>
+<p>The End.</p>]]></content:encoded>
+            <enclosure url="https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1" length="0" type="image//avatar/837266b567b50fd59e72428220bf69b1"/>
+        </item>
         <item>
             <title><![CDATA[How to fix libGL (MESA-LOADER) error on 64-bit Fedora]]></title>
             <link>https://blog-en.litehell.info/post/how_to_fix_libgl_error_on_64bit_fedora</link>

@@ -11,6 +11,15 @@
     },
     "items": [
         {
+            "id": "how_to_reload_tor_config",
+            "content_html": "<p>To reload relay config, restarting tor works very well.</p>\n<p>But sometimes, Tor flags disappear while restarting if unlucky.</p>\n<p>To avoid that, you can reload tor config without restarting, by sending SIGHUP signal to tor process.</p>\n<pre><code class=\"language-bash\"><span class=\"pl-c\"># way to use pkill</span>\npkill --signal 1 tor\n<span class=\"pl-c\"># way to use kill</span>\n<span class=\"pl-c1\">kill</span> -1 (tor pid)\n</code></pre>\n<p><code>1</code> in command means SIGHUP signal.</p>\n<p>The End.</p>",
+            "url": "https://blog-en.litehell.info/post/how_to_reload_tor_config",
+            "title": "How to reload tor relay config",
+            "summary": "Reloading without restarting",
+            "image": "https://gravatar.com/avatar/837266b567b50fd59e72428220bf69b1",
+            "date_modified": "2026-06-29T14:12:12.146Z"
+        },
+        {
             "id": "how_to_fix_libgl_error_on_64bit_fedora",
             "content_html": "<h1>Problem</h1>\n<p>You may encounter this error when you try to run Windows game with umu-launcher or wine, on 64bit Fedora.</p>\n<pre><code>libGL error: MESA-LOADER: failed to open iris: /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri/iris_dri.so: wrong ELF class: ELFCLASS64 (search paths /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri)\nlibGL error: failed to load driver: iris\nlibGL error: MESA-LOADER: failed to open swrast: /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri/swrast_dri.so: wrong ELF class: ELFCLASS64 (search paths /usr/lib/pressure-vessel/overrides/lib/x86_64-linux-gnu/dri)\nlibGL error: failed to load driver: swrast\nX Error of failed request:  GLXBadContext\n  Major opcode of failed request:  150 (GLX)\n  Minor opcode of failed request:  6 (X_GLXIsDirect)\n  Serial number of failed request:  537\n  Current serial number in output stream:  536\n\n</code></pre>\n<h1>Solution</h1>\n<p>Solution is very simple. Just install 32bit library.</p>\n<pre><code class=\"language-bash\">sudo dnf install mesa-libGL.i686\n</code></pre>",
             "url": "https://blog-en.litehell.info/post/how_to_fix_libgl_error_on_64bit_fedora",
